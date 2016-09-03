@@ -1,8 +1,10 @@
-package org.vaadin.simplefiledownloader;
+package com.example.test;
 
 import java.io.ByteArrayInputStream;
 
 import javax.servlet.annotation.WebServlet;
+
+import org.vaadin.simplefiledownloader.SimpleFileDownloader;
 
 import com.vaadin.annotations.Theme;
 import com.vaadin.annotations.VaadinServletConfiguration;
