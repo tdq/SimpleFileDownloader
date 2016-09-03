@@ -87,6 +87,7 @@ public class SimpleFileDownloader extends AbstractExtension {
         } finally {
             session.unlock();
         }
+        
         stream.writeResponse(request, response);
         return true;
     }

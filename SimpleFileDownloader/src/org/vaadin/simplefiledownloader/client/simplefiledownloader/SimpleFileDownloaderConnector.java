@@ -11,19 +11,20 @@ import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.RootPanel;
 import com.vaadin.client.BrowserInfo;
 import com.vaadin.client.ServerConnector;
-import com.vaadin.client.communication.RpcProxy;
 import com.vaadin.client.extensions.AbstractExtensionConnector;
 import com.vaadin.shared.ui.Connect;
 
+/**
+ * 
+ * @author nikolaigorokhov
+ *
+ */
 @SuppressWarnings("serial")
 @Connect(SimpleFileDownloader.class)
 public class SimpleFileDownloaderConnector extends AbstractExtensionConnector {
 
 	private IFrameElement iframe;
-	
-	SimpleFileDownloaderServerRpc rpc = RpcProxy
-			.create(SimpleFileDownloaderServerRpc.class, this);
-	
+		
 	public SimpleFileDownloaderConnector() {
 		registerRpc(SimpleFileDownloaderClientRpc.class, new SimpleFileDownloaderClientRpc() {
 			
