@@ -37,16 +37,18 @@ public class SimplefiledownloaderUI extends UI {
 		SimpleFileDownloader downloader = new SimpleFileDownloader();
 		addExtension(downloader);
 		
+		final StreamResource resource = new StreamResource(() -> {
+			return new ByteArrayInputStream("This is test clicked on button".getBytes());
+		}, "testButton.txt");
+		
+		downloader.setFileDownloadResource(resource);
+		
 		Button button = new Button("Click Me");
 		button.addClickListener(new Button.ClickListener() {
 			public void buttonClick(ClickEvent event) {
 				//layout.addComponent(new Label("Thank you for clicking"));
 				
-				final StreamResource resource = new StreamResource(() -> {
-					return new ByteArrayInputStream("This is test clicked on button".getBytes());
-				}, "testButton.txt");
 				
-				downloader.setFileDownloadResource(resource);
 				downloader.download();
 			}
 		});

@@ -6,32 +6,71 @@ import org.vaadin.simplefiledownloader.client.simplefiledownloader.SimpleFileDow
 
 import com.vaadin.server.AbstractClientConnector;
 import com.vaadin.server.AbstractExtension;
+import com.vaadin.server.ClassResource;
 import com.vaadin.server.ConnectorResource;
 import com.vaadin.server.DownloadStream;
+import com.vaadin.server.ExternalResource;
+import com.vaadin.server.FileResource;
 import com.vaadin.server.Resource;
 import com.vaadin.server.StreamResource;
+import com.vaadin.server.ThemeResource;
 import com.vaadin.server.VaadinRequest;
 import com.vaadin.server.VaadinResponse;
 import com.vaadin.server.VaadinSession;
 
 /**
+ * Extension that starts a download when the extended component is clicked. This
+ * is used to overcome two challenges:
+ * <ul>
+ * <li>Resource should be bound to a component to allow it to be garbage
+ * collected when there are no longer any ways of reaching the resource.</li>
+ * <li>Download should be started directly when the user clicks e.g. a Button
+ * without going through a server-side click listener to avoid triggering
+ * security warnings in some browsers.</li>
+ * </ul>
+ * <p>
+ * Please note that the download will be started in an iframe, which means that
+ * care should be taken to avoid serving content types that might make the
+ * browser attempt to show the content using a plugin instead of downloading it.
+ * Connector resources (e.g. {@link FileResource} and {@link ClassResource})
+ * will automatically be served using a
+ * <code>Content-Type: application/octet-stream</code> header unless
+ * {@link #setOverrideContentType(boolean)} has been set to <code>false</code>
+ * while files served in other ways, (e.g. {@link ExternalResource} or
+ * {@link ThemeResource}) will not automatically get this treatment.
+ * </p>
  * 
- * @author nikolaigorokhov
- *
+ * @author Vaadin Ltd, modified by Nikolai Gorokhov
+ * @since 7.0.0
  */
 @SuppressWarnings("serial")
 public class SimpleFileDownloader extends AbstractExtension {
 	
 	private boolean overrideContentType = true;
 
+	/**
+     * Sets the resource that is downloaded when download method is called.
+     * 
+     * @param resource
+     *            the resource to download
+     */
 	public void setFileDownloadResource(StreamResource resource) {
 		setResource("sdl", resource);
 	}
 	
+	/**
+     * Gets the resource set for download.
+     * 
+     * @return the resource that will be downloaded if clicking the extended
+     *         component
+     */
 	public Resource getFileDownloadResource() {
         return getResource("sdl");
     }
 
+	/**
+	 * Initiates downloading of resource.
+	 */
 	public void download() {
 		getRpcProxy(SimpleFileDownloaderClientRpc.class).download();
 	}
@@ -41,10 +80,34 @@ public class SimpleFileDownloader extends AbstractExtension {
 		super.extend(target);
 	}
 	
+	/**
+     * Sets whether the content type of served resources should be overriden to
+     * <code>application/octet-stream</code> to reduce the risk of a browser
+     * plugin choosing to display the resource instead of downloading it. This
+     * is by default set to <code>true</code>.
+     * <p>
+     * Please note that this only affects Connector resources (e.g.
+     * {@link FileResource} and {@link ClassResource}) but not other resource
+     * types (e.g. {@link ExternalResource} or {@link ThemeResource}).
+     * </p>
+     * 
+     * @param overrideContentType
+     *            <code>true</code> to override the content type if possible;
+     *            <code>false</code> to use the original content type.
+     */
 	public void setOverrideContentType(boolean overrideContentType) {
         this.overrideContentType = overrideContentType;
     }
 	
+	/**
+     * Checks whether the content type should be overridden.
+     * 
+     * @see #setOverrideContentType(boolean)
+     * 
+     * @return <code>true</code> if the content type will be overridden when
+     *         possible; <code>false</code> if the original content type will be
+     *         used.
+     */
 	public boolean isOverrideContentType() {
         return overrideContentType;
     }
