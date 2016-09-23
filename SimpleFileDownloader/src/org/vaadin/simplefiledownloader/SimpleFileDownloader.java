@@ -19,15 +19,7 @@ import com.vaadin.server.VaadinResponse;
 import com.vaadin.server.VaadinSession;
 
 /**
- * Extension that starts a download when the extended component is clicked. This
- * is used to overcome two challenges:
- * <ul>
- * <li>Resource should be bound to a component to allow it to be garbage
- * collected when there are no longer any ways of reaching the resource.</li>
- * <li>Download should be started directly when the user clicks e.g. a Button
- * without going through a server-side click listener to avoid triggering
- * security warnings in some browsers.</li>
- * </ul>
+ * Extension that starts a download by calling download method.
  * <p>
  * Please note that the download will be started in an iframe, which means that
  * care should be taken to avoid serving content types that might make the
