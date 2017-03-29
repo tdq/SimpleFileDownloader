@@ -5,6 +5,7 @@ import com.vaadin.ui.Button;
 import com.vaadin.ui.Component;
 import com.vaadin.ui.VerticalLayout;
 import org.vaadin.addonhelpers.AbstractTest;
+import org.vaadin.simplefiledownloader.SimpleFileDownloader;
 
 import java.io.ByteArrayInputStream;
 

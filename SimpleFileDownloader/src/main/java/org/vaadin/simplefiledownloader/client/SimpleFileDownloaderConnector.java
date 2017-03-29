@@ -26,36 +26,32 @@ public class SimpleFileDownloaderConnector extends AbstractExtensionConnector {
 	private IFrameElement iframe;
 		
 	public SimpleFileDownloaderConnector() {
-		registerRpc(SimpleFileDownloaderClientRpc.class, new SimpleFileDownloaderClientRpc() {
-			
-			@Override
-			public void download() {
-				final String url = getResourceUrl("sdl");
-		        if (url != null && !url.isEmpty()) {
-		            BrowserInfo browser = BrowserInfo.get();
-		            if (browser.isIOS()) {
-		                Window.open(url, "_blank", "");
-		            } else {
-		                if (iframe != null) {
-		                    // make sure it is not on dom tree already, might start
-		                    // multiple downloads at once
-		                    iframe.removeFromParent();
-		                }
-		                iframe = Document.get().createIFrameElement();
+		registerRpc(SimpleFileDownloaderClientRpc.class, (SimpleFileDownloaderClientRpc) () -> {
+            final String url = getResourceUrl("sdl");
+            if (url != null && !url.isEmpty()) {
+                BrowserInfo browser = BrowserInfo.get();
+                if (browser.isIOS()) {
+                    Window.open(url, "_blank", "");
+                } else {
+                    if (iframe != null) {
+                        // make sure it is not on dom tree already, might start
+                        // multiple downloads at once
+                        iframe.removeFromParent();
+                    }
+                    iframe = Document.get().createIFrameElement();
 
-		                Style style = iframe.getStyle();
-		                style.setVisibility(Visibility.HIDDEN);
-		                style.setHeight(0, Unit.PX);
-		                style.setWidth(0, Unit.PX);
+                    Style style = iframe.getStyle();
+                    style.setVisibility(Visibility.HIDDEN);
+                    style.setHeight(0, Unit.PX);
+                    style.setWidth(0, Unit.PX);
 
-		                iframe.setFrameBorder(0);
-		                iframe.setTabIndex(-1);
-		                iframe.setSrc(url);
-		                RootPanel.getBodyElement().appendChild(iframe);
-		            }
-		        }
-			}
-		});
+                    iframe.setFrameBorder(0);
+                    iframe.setTabIndex(-1);
+                    iframe.setSrc(url);
+                    RootPanel.getBodyElement().appendChild(iframe);
+                }
+            }
+        });
 	}
 
 	@Override
