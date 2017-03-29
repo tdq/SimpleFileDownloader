@@ -1,4 +1,4 @@
-package com.example.test;
+package org.vaadin.simplefiledownloader.it;
 
 import java.io.ByteArrayInputStream;
 

@@ -1,4 +1,4 @@
-package org.vaadin.simplefiledownloader.client.simplefiledownloader;
+package org.vaadin.simplefiledownloader.client;
 
 import com.vaadin.shared.communication.ClientRpc;
 
