@@ -2,7 +2,7 @@ package org.vaadin.simplefiledownloader;
 
 import java.io.IOException;
 
-import org.vaadin.simplefiledownloader.client.simplefiledownloader.SimpleFileDownloaderClientRpc;
+import org.vaadin.simplefiledownloader.client.SimpleFileDownloaderClientRpc;
 
 import com.vaadin.server.AbstractClientConnector;
 import com.vaadin.server.AbstractExtension;

@@ -1,0 +1,3 @@
+Manifest-Version: 1.0
+Vaadin-Package-Version: 1
+Vaadin-Addon: ${Vaadin-Addon}

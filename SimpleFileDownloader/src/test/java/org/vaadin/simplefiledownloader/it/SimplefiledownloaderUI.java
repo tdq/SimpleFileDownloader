@@ -1,10 +1,8 @@
-package com.example.test;
+package org.vaadin.simplefiledownloader.it;
 
 import java.io.ByteArrayInputStream;
 
 import javax.servlet.annotation.WebServlet;
-
-import org.vaadin.simplefiledownloader.SimpleFileDownloader;
 
 import com.vaadin.annotations.Theme;
 import com.vaadin.annotations.VaadinServletConfiguration;
@@ -14,9 +12,9 @@ import com.vaadin.server.VaadinRequest;
 import com.vaadin.server.VaadinServlet;
 import com.vaadin.ui.Button;
 import com.vaadin.ui.Button.ClickEvent;
-import com.vaadin.ui.Label;
 import com.vaadin.ui.UI;
 import com.vaadin.ui.VerticalLayout;
+import org.vaadin.simplefiledownloader.SimpleFileDownloader;
 
 @SuppressWarnings("serial")
 @Theme("simplefiledownloader")

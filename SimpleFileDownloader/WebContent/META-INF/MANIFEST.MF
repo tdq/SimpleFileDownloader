@@ -1,8 +1,0 @@
-Manifest-Version: 1.0
-Implementation-Title: SimpleFileDownloader
-Implementation-Version: 1.0.3
-Vaadin-Widgetsets: org.vaadin.simplefiledownloader.Simplefiledownloade
- rWidgetset
-Vaadin-Package-Version: 1
-Class-Path: 
-
