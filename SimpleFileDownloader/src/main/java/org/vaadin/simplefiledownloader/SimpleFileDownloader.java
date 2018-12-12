@@ -123,6 +123,7 @@ public class SimpleFileDownloader extends AbstractExtension {
             }
             stream = ((ConnectorResource) resource).getStream();
 
+            stream.setParameter("Cache-Control", "no-store");
             String contentDisposition = stream
                     .getParameter(DownloadStream.CONTENT_DISPOSITION);
             if (contentDisposition == null) {
