@@ -9,17 +9,6 @@ import org.vaadin.simplefiledownloader.SimpleFileDownloader;
 
 import java.io.ByteArrayInputStream;
 
-/**
- * <p><b>simplefiledownloaderaddon</b></p>
- * <p>Aufgabe der Klasse</p>
- * <br><tt>History:<ul>
- * <li>27.03.2017 angelegt</li>
- * </ul>
- * <p>Copyright: 2017</p>
- * <p>Organisation: ABDATA</p>
- *
- * @author pn
- */
 public class MySimpleFileDownloaderTest extends AbstractTest {
 
     @Override
